@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 //http://localhost:8080/dieta-app
@@ -82,5 +84,17 @@ public class InicioControlador {
         }
         this.pacienteServicio.guardarPaciente(paciente);
         return ResponseEntity.ok(paciente);
+    }
+    //ELIMINAR PACIENTE
+    @DeleteMapping("pacientes/{id}")
+    public ResponseEntity<Map<String, Boolean>> eliminarPaciente(@PathVariable int id){
+        Paciente paciente = pacienteServicio.buscarPacientePorId(id);
+        if (paciente == null) logger.warn("NO SE ENCONTRÓ EL PACIENTE CON EL ID");
+        else {
+            this.pacienteServicio.eliminarPacientePorId(id);
+        }
+        Map<String, Boolean> respuesta = new HashMap<>();
+        respuesta.put("Eliminado", Boolean.TRUE);
+        return  ResponseEntity.ok(respuesta);
     }
 }
