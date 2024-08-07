@@ -10,6 +10,15 @@ import lombok.*;
 @Data
 @Table( name = "alimento")
 public class Alimento {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_alimento;
+    private String nombre;
+    private String descripcion;
+    private String categoria;
+    private int calorias;
+
+
     public int getId_alimento() {
         return id_alimento;
     }
@@ -50,11 +59,5 @@ public class Alimento {
         this.calorias = calorias;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_alimento;
-    private String nombre;
-    private String descripcion;
-    private String categoria;
-    private int calorias;
+
 }

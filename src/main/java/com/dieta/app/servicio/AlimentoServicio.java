@@ -14,7 +14,11 @@ public class AlimentoServicio implements IAlimentoServicio{
 
     @Override
     public List<Alimento> listarAlimentos() {
-        return this.alimentoRepositorio.findAll();
+        //AlimentoComparator comparator = new AlimentoComparator();
+        List<Alimento> list = this.alimentoRepositorio.findAll();
+        //list.sort(comparator);
+        list.sort(( Alimento a, Alimento b) -> a.getCategoria().compareToIgnoreCase(b.getCategoria()));
+        return list;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.dieta.app.controlador;
 
-import com.dieta.app.comparator.PacienteComparator;
 import com.dieta.app.modelo.Paciente;
 import com.dieta.app.servicio.PacienteServicio;
 import org.slf4j.Logger;
@@ -32,9 +31,8 @@ public class InicioControlador {
     @GetMapping("/pacientes")
     public List<Paciente> obtenerPacientes(){
         List<Paciente> pacientes = this.pacienteServicio.listarPacientes();
-        PacienteComparator comparator = new PacienteComparator();
 
-        pacientes.sort(comparator);
+        pacientes.sort( (Paciente a, Paciente b) -> a.getPrimer_apellido().compareToIgnoreCase(b.getPrimer_apellido()) );
         logger.info("Pacientes obtenidos:");
         //pacientes.forEach((paciente -> logger.info(paciente.toString())));
         return pacientes;
